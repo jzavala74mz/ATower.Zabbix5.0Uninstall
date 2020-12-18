@@ -11,7 +11,7 @@
             - name: Validar si actualmente se encuentra instalada la solución del zabbix
               service_facts:
             - debug:
-                    msg: '{{ app_nombre_zabbix }}' Instalado --> DESINSTALAR
+                    msg: "'{{ app_nombre_zabbix }}' Instalado --> DESINSTALAR"
               when: "'{{ app_nombre_zabbix }}' in services"
                       
             - name: Desinstalar Zabbix en caso de estar instalado
