@@ -10,6 +10,6 @@
               service_facts:
             - debug:
                     msg: Zabbix Instslado --> DESINSTALAR
-              when: "'git' in services"
+              when: "'zabbix 5.0' in services"
                       
 
