@@ -4,17 +4,19 @@
     hosts: all
     vars:
             repo_tag: zabbix_bdd
+            vars:
+            app_nombre_zabbix: zabbix
 
     tasks:
             - name: Validar si actualmente se encuentra instalada la solución del zabbix
               service_facts:
             - debug:
-                    msg: Zabbix Instslado --> DESINSTALAR
-              when: "'zabbix 5.0' in services"
+                    msg: '{{ app_nombre_zabbix }}' Instalado --> DESINSTALAR
+              when: "'{{ app_nombre_zabbix }}' in services"
                       
             - name: Desinstalar Zabbix en caso de estar instalado
               dnf:
-                    name: 'zabbix 5.0'
+                    name: '{{ app_nombre_zabbix }}'
                     state: removed
-              when: "'zabbix 5.0' in services"
+              when: "'{{ app_nombre_zabbix }}' in services"
 
