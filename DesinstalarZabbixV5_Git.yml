@@ -16,7 +16,15 @@
                       
             - name: Desinstalar Zabbix en caso de estar instalado
               dnf:
-                    name: '{{ app_nombre_zabbix }}'
+                    name: "{{ item }}"
                     state: removed
-              when: "'zabbix' in services"
-
+              with_items:
+                    - zabbix
+                    - zabbix-release
+                    - zabbix-server
+                    - zabbix-server-mysql
+                    - zabbix-web
+                    - zabbix-web-mysql
+                    - onapp-zabbix
+                    
+              
