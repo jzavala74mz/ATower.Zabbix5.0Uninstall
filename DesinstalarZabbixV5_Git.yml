@@ -12,4 +12,9 @@
                     msg: Zabbix Instslado --> DESINSTALAR
               when: "'zabbix 5.0' in services"
                       
+          - name: Desinstalar Zabbix en caso de estar instalado
+            dnf:
+                    name: zabbix 5.0
+                    state: removed
+            when: "'zabbix 5.0' in services"
 
