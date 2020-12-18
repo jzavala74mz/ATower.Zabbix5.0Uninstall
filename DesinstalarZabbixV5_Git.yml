@@ -16,6 +16,6 @@
                       
             - name: Desinstalar Zabbix en caso de estar instalado
               dnf:
-                    name: name: ['zabbix', 'zabbix-release', 'zabbix-server', 'zabbix-server-mysql', 'zabbix-web', 'zabbix-web-mysql', 'onapp-zabbix']
+                    name: ['zabbix', 'zabbix-release', 'zabbix-server', 'zabbix-server-mysql', 'zabbix-web', 'zabbix-web-mysql', 'onapp-zabbix']
                     state: removed
 
