@@ -1,0 +1,15 @@
+---
+  ## Desinstalar la aplicación Zabbix segun los servidores establecidos desde A-Tower
+  - name: DESINSTALAR LA APLICACIÓN ZABBIX EN SU VERSIÓN 5.0 DESDE RED HAT8/CENTOS 8
+    hosts: all
+    vars:
+            repo_tag: zabbix_bdd
+
+    tasks:
+            - name: Validar si actualmente se encuentra instalada la solución del zabbix
+              service_facts:
+            - debug:
+                    msg: Zabbix Instslado --> DESINSTALAR
+              when: "'git' in services"
+                      
+
