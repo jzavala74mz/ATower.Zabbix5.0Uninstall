@@ -12,11 +12,11 @@
               service_facts:
             - debug:
                     msg: '{{ app_nombre_zabbix }} Instalado --> DESINSTALAR'
-              when: '{{ app_nombre_zabbix }} in services'
+              when: 'zabbix' in services
                       
             - name: Desinstalar Zabbix en caso de estar instalado
               dnf:
                     name: '{{ app_nombre_zabbix }}'
                     state: removed
-              when: '{{ app_nombre_zabbix }} in services'
+              when: 'zabbix' in services
 
