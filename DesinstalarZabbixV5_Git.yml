@@ -7,8 +7,31 @@
             vars:
             app_nombre_zabbix: zabbix
             ruta_archivo_onapp: /etc/httpd/conf.d/onapp-zabbix.conf
+            ruta_carpeta_repogit: /home/ZabbixDesinstallGit
+            ruta_archivo_repogit: /home/ZabbixBDDBackupGit.zip
 
     tasks:
+
+            - name: Validar si existe la carpeta para descargar el contenido de git
+              stat:
+                    path: '{{ ruta_carpeta_repogit }}'
+              register: existe_ruta_carpeta_repogit
+
+            - name: Eliminar la carpeta actual del repositorio git para recibir las nuevas actualizaciones
+              file:
+                    path: '{{ ruta_carpeta_repogit }}'
+                    state: absent
+              when: existe_ruta_carpeta_repogit.stat.exists
+
+            - name: Descargar el contenido de nuestro repositorio para este proyecto desde la red
+              git:
+                    repo: https://github.com/jzavala74mz/ATower.ZabbixFreshInstall
+                    dest: '{{ ruta_carpeta_repogit }}'
+                    archive: '{{ ruta_archivo_repogit }}'
+
+
+ 
+
             - name: Validar si actualmente se encuentra instalada la solución del zabbix
               service_facts:
             - debug:
@@ -28,6 +51,15 @@
             - name: Renombramos el archivo /etc/httpd/conf.d/onapp-zabbix.conf a un respaldo
               command: mv /etc/httpd/conf.d/onapp-zabbix.conf /etc/httpd/conf.d/onapp-zabbix.conf.rpmsave
               when: existe_ruta_archivo_onapp.stat.exists
+
+            - name: Importar SQL para eliminar la base de datos y el usuario
+              mysql_db:
+                    name: zabbix
+                    login_user: root
+                    encoding: utf8
+                    state: import
+                    config_file: '{{ ruta_carpeta_repogit }}/.my.cnf'
+                    target: '{{ ruta_carpeta_repogit }}/RemoveBDDZabbix_v5.0.sql'
 
             - name: Reestablecer el servidor de apache
               service:
