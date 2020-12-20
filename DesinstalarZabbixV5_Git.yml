@@ -19,3 +19,12 @@
                     name: ['zabbix', 'zabbix-release', 'zabbix-server', 'zabbix-server-mysql', 'zabbix-web', 'zabbix-web-mysql', 'onapp-zabbix']
                     state: removed
 
+            - name: Renombramos el archivo /etc/httpd/conf.d/onapp-zabbix.conf a un respaldo
+              command: mv /etc/httpd/conf.d/onapp-zabbix.conf /etc/httpd/conf.d/onapp-zabbix.conf.rpmsave
+
+            - name: Reestablecer el servidor de apache
+              service:
+                    name: httpd
+                    state: restarted
+
+
