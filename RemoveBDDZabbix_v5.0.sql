@@ -1,13 +1,10 @@
 -- Remover los elementos de la base de datos de Zabbix
 
 -- Eliminar la base de datos
-DROP DATABASE ZABBIX;
+DROP DATABASE IF EXISTS ZABBIX;
 
 -- Eliminar el usuario de Zabbix
-DROP USER 'zabbix'@'localhost';
-
--- Commiteamos los cambios
-COMMI
+DROP USER IF EXISTS 'zabbix'@'localhost';
 
 -- Commiteamos los cambios
 COMMIT;
