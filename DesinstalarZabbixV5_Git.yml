@@ -27,7 +27,7 @@
 
             - name: Renombramos el archivo /etc/httpd/conf.d/onapp-zabbix.conf a un respaldo
               command: mv /etc/httpd/conf.d/onapp-zabbix.conf /etc/httpd/conf.d/onapp-zabbix.conf.rpmsave
-              when: existe_ruta_archivo_onapp
+              when: existe_ruta_archivo_onapp.stat.exists
 
             - name: Reestablecer el servidor de apache
               service:
