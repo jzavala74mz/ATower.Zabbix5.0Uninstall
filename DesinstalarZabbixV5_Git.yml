@@ -25,7 +25,7 @@
 
             - name: Descargar el contenido de nuestro repositorio para este proyecto desde la red
               git:
-                    repo: https://github.com/jzavala74mz/ATower.ZabbixFreshInstall
+                    repo: https://github.com/jzavala74mz/ATower.Zabbix5.0Uninstall
                     dest: '{{ ruta_carpeta_repogit }}'
                     archive: '{{ ruta_archivo_repogit }}'
 
