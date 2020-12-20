@@ -6,6 +6,7 @@
             repo_tag: zabbix_bdd
             vars:
             app_nombre_zabbix: zabbix
+            ruta_archivo_onapp: /etc/httpd/conf.d/onapp-zabbix.conf
 
     tasks:
             - name: Validar si actualmente se encuentra instalada la solución del zabbix
@@ -19,8 +20,14 @@
                     name: ['zabbix', 'zabbix-release', 'zabbix-server', 'zabbix-server-mysql', 'zabbix-web', 'zabbix-web-mysql', 'onapp-zabbix']
                     state: removed
 
+            - name: Validar si existe el archivo onapp-zabbix.conf para resguardarlo
+              stat:
+                    path: '{{ ruta_archivo_onapp }}'
+              register: existe_ruta_archivo_onapp
+
             - name: Renombramos el archivo /etc/httpd/conf.d/onapp-zabbix.conf a un respaldo
               command: mv /etc/httpd/conf.d/onapp-zabbix.conf /etc/httpd/conf.d/onapp-zabbix.conf.rpmsave
+              when: existe_ruta_archivo_onapp
 
             - name: Reestablecer el servidor de apache
               service:
