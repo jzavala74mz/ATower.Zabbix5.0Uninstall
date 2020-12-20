@@ -8,7 +8,7 @@
             app_nombre_zabbix: zabbix
             ruta_archivo_onapp: /etc/httpd/conf.d/onapp-zabbix.conf
             ruta_carpeta_repogit: /home/ZabbixDesinstallGit
-            ruta_archivo_repogit: /home/ZabbixBDDBackupGit.zip
+            ruta_archivo_repogit: /home/ZabbixDesinstallGit.zip
 
     tasks:
 
